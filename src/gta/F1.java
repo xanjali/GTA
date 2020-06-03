@@ -18,24 +18,24 @@ import javax.swing.JButton;
  *
  * @author anjali
  */
-public class F0 extends JApplet implements ActionListener {
+public class F1 extends JApplet implements ActionListener {
 
-    private final JButton customer =new JButton("Customer");//button for Customer
-    private final JButton t_owner =new JButton("Theatre Owner");//button for Theatre Owner
+    private final JButton login =new JButton("Login");//button for Customer
+    private final JButton signup =new JButton("Sign Up");//button for Theatre Owner
     @Override
     public void init() {
          GridBagLayout g1=new GridBagLayout();//gridLayout
 	setLayout(g1);
 	GridBagConstraints c= new GridBagConstraints();
         c.weighty=0.0001;
-        g1.setConstraints(customer, c);
-        add(customer);
+        g1.setConstraints(login, c);
+        add(login);
         c.gridy=1;
-        g1.setConstraints(t_owner, c);
-        add(t_owner);
+        g1.setConstraints(signup, c);
+        add(signup);
         
-        customer.addActionListener((ActionListener) this);
-        t_owner.addActionListener((ActionListener) this); 
+        login.addActionListener((ActionListener) this);
+        signup.addActionListener((ActionListener) this); 
     }
 
     // TODO overwrite start(), stop() and destroy() methods
