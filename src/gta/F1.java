@@ -20,8 +20,8 @@ import javax.swing.JButton;
  */
 public class F1 extends JApplet implements ActionListener {
 
-    private final JButton login =new JButton("Login");//button for Customer
-    private final JButton signup =new JButton("Sign Up");//button for Theatre Owner
+    private final JButton login =new JButton("Login");//button for login
+    private final JButton signup =new JButton("Sign Up");//button sign up
     @Override
     public void init() {
          GridBagLayout g1=new GridBagLayout();//gridLayout
