@@ -8,7 +8,7 @@ package gta;
 
 /**
  *
- * @author anjana
+ * @author anjali
  */
 public class Gta {
 
@@ -16,7 +16,9 @@ public class Gta {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        //main class
         // TODO code application logic here
+        
     }
     
 }
