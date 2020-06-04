@@ -12,7 +12,7 @@ import javax.swing.JApplet;
  *
  * @author anjana
  */
-public class f4 extends JApplet {
+public class Select_Movie extends JApplet {
 
     /**
      * Initialization method that will be called after the applet is loaded into

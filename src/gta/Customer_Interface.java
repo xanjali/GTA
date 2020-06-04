@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+//customer login-signup page
 package gta;
 
-import java.awt.Button;
+import java.awt.*;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -18,13 +18,13 @@ import javax.swing.JButton;
  *
  * @author anjali
  */
-public class F1 extends JApplet implements ActionListener {
+public class Customer_Interface extends JApplet implements ActionListener {
 
     private final JButton login =new JButton("Login");//button for login
     private final JButton signup =new JButton("Sign Up");//button sign up
     @Override
     public void init() {
-         GridBagLayout g1=new GridBagLayout();//gridLayout
+        GridBagLayout g1=new GridBagLayout();//gridLayout
 	setLayout(g1);
 	GridBagConstraints c= new GridBagConstraints();
         c.weighty=0.0001;
