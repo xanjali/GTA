@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+//main window
 package gta;
 
 import java.awt.Button;
@@ -18,7 +18,7 @@ import javax.swing.JButton;
  *
  * @author anjali
  */
-public class F0 extends JApplet implements ActionListener {
+public class GTA_Window extends JApplet implements ActionListener {
 
     private final JButton customer =new JButton("Customer");//button for Customer
     private final JButton t_owner =new JButton("Theatre Owner");//button for Theatre Owner
