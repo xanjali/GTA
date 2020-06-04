@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-//import static java.awt.FlowLayout.*;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment.*;
 import static javax.swing.GroupLayout.Alignment.CENTER;
@@ -16,6 +16,7 @@ public class Payment_Receipt extends JApplet implements ActionListener{
     private final JLabel name = new JLabel("Name          :                           ");
     private final JLabel movie = new JLabel("Movie          :");
     private final JLabel theatre = new JLabel("Theatre      :");
+    private final JLabel date = new JLabel("Date          :");
     private final JLabel time = new JLabel("time            :");
     private final JLabel seat = new JLabel("Seat            :");
     private final JLabel amt = new JLabel("Amount       :");
@@ -34,6 +35,7 @@ public class Payment_Receipt extends JApplet implements ActionListener{
                 .addComponent(name)
                 .addComponent(movie)
                 .addComponent(theatre)
+                .addComponent(date)
                 .addComponent(time)
                 .addComponent(seat)
                 .addComponent(amt)
@@ -47,6 +49,7 @@ public class Payment_Receipt extends JApplet implements ActionListener{
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(name))
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(movie))
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(theatre))
+        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(date))
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(time))
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(seat))
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(amt))
