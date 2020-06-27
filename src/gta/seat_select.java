@@ -1,19 +1,18 @@
 package gta;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.*;
 import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment.*;
-import static javax.swing.GroupLayout.Alignment.CENTER;
-import javax.swing.JApplet;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.*;
-import static javax.swing.GroupLayout.Alignment.CENTER;
+import javax.swing.JFrame;
 
 
-public class seat_select extends JApplet {
 
+public class seat_select extends Frame implements ActionListener {
+    private final JButton b= new JButton("Back");
     private final JButton s1= new JButton("s1 ");  
     private final JButton s2= new JButton("s2 ");
     private final JButton s3= new JButton("s3 ");
@@ -45,8 +44,8 @@ public class seat_select extends JApplet {
     private final JButton s25= new JButton("s25");
     
     private final JButton p= new JButton("Pay");
-    @Override
-     public void init() {
+     public seat_select(){
+        setTitle("Select Seat");
         GroupLayout layout = new GroupLayout(this);  
         layout.setAutoCreateGaps(true);  
         layout.setAutoCreateContainerGaps(true); 
@@ -54,6 +53,7 @@ public class seat_select extends JApplet {
         layout.createSequentialGroup()
                 
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        .addComponent(b)
         .addComponent(s1)
         .addComponent(s6)
         .addComponent(s11)
@@ -92,7 +92,8 @@ public class seat_select extends JApplet {
         
         layout.setVerticalGroup(
         layout.createSequentialGroup()
-                
+        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+        .addComponent(b))
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
         .addComponent(s1)
         .addComponent(s2)
@@ -133,11 +134,46 @@ public class seat_select extends JApplet {
        ); 
         setLayout(layout); 
         
+        b.addActionListener((ActionListener) this);
+        p.addActionListener((ActionListener) this);
+        
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent arg0) {
+
+                System.exit(0);
+            }
+        });
+        
     }
-
-   
-        // TODO start asynchronous download of heavy resources
-    
-
-    // TODO overwrite start(), stop() and destroy() methods
+     public static void main(String args[]) { 
+        seat_select f =new seat_select();
+        f.setSize(500,300);
+        f.setVisible(true);
+        
+    }
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        
+        try{
+         if(ae.getSource() == b)
+         {
+          Search_Movie f = new Search_Movie();
+          f.setSize(500,300);
+          f.setVisible(true);
+          dispose();
+         } 
+         if(ae.getSource() == p)
+         {
+          Payment_Details f1 =new Payment_Details();
+          f1.setSize(500,300);
+          f1.setVisible(true);
+          dispose();
+         } 
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        } 
+    }
 }
