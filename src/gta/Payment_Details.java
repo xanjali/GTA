@@ -3,16 +3,16 @@ package gta;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.*;
-//import static java.awt.FlowLayout.*;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment.*;
 import static javax.swing.GroupLayout.Alignment.CENTER;
-import javax.swing.JApplet;
 import javax.swing.JButton;
 
 
-public class Payment_Details extends JApplet implements ActionListener{
+public class Payment_Details extends Frame implements ActionListener{
     private final JLabel details= new JLabel("  Details");
     private final JLabel name = new JLabel("Name          :                           ");
     private final JLabel movie = new JLabel("Movie          :");
@@ -22,16 +22,18 @@ public class Payment_Details extends JApplet implements ActionListener{
     private final JLabel seat = new JLabel("Seat            :");
     private final JLabel amt = new JLabel("Amount       :");
     private final JButton pay = new JButton("Pay");
-    @Override
-    public void init() {
+    private final JButton b = new JButton("Back");
+    
+    public Payment_Details() {
+        setTitle("Payment Details");
         GroupLayout layout = new GroupLayout(this);  
         layout.setAutoCreateGaps(true);  
         layout.setAutoCreateContainerGaps(true);  
          
-        
         layout.setHorizontalGroup(
         layout.createSequentialGroup()
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(b)
                 .addComponent(details,CENTER)
                 .addComponent(name)
                 .addComponent(movie)
@@ -47,6 +49,7 @@ public class Payment_Details extends JApplet implements ActionListener{
         
         layout.setVerticalGroup(
         layout.createSequentialGroup()
+        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(b))
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(details))  
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(name))
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(movie))
@@ -58,12 +61,47 @@ public class Payment_Details extends JApplet implements ActionListener{
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(pay))
         ); 
         setLayout(layout); 
+        b.addActionListener((ActionListener) this);
+        pay.addActionListener((ActionListener) this);
+        
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent arg0) {
+
+                System.exit(0);
+            }
+        });
+        
+    }
+     public static void main(String args[]) { 
+        Payment_Details f =new Payment_Details();
+        f.setSize(500,300);
+        f.setVisible(true);
+        
     }
 
-    // TODO overwrite start(), stop() and destroy() methods
-
+    
     @Override
     public void actionPerformed(ActionEvent ae) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       try{
+         if(ae.getSource() == b)
+         {
+          seat_select f = new seat_select();
+          f.setSize(500,300);
+          f.setVisible(true);
+          dispose();
+         } 
+         if(ae.getSource() == pay)
+         {
+          Payment_Receipt f1 =new Payment_Receipt();
+          f1.setSize(500,300);
+          f1.setVisible(true);
+          dispose();
+         } 
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        } 
     }
 }

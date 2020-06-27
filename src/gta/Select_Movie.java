@@ -1,23 +1,21 @@
 
 package gta;
 
-import javax.swing.JApplet;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment.*;
 import static javax.swing.GroupLayout.Alignment.CENTER;
-import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.*;
-import static javax.swing.GroupLayout.Alignment.CENTER;
 
 
-public class Select_Movie extends JApplet {
-
+public class Select_Movie extends Frame implements ActionListener {
+    private final JButton b = new JButton("Back");
     private final JLabel label = new JLabel("Theatre");    
     String theatre[]={"t1","t2","t3","t4","t5"};        
     final JComboBox cb=new JComboBox(theatre);  
@@ -32,14 +30,14 @@ public class Select_Movie extends JApplet {
     private final JRadioButton s2 = new JRadioButton();
     private final JLabel l2 = new JLabel("     Slot2");
     private final JButton d = new JButton("Select Seat");
-    @Override
-     public void init() {
+    public Select_Movie() {
+        setTitle("Select details");
         GroupLayout layout = new GroupLayout(this);  
         layout.setAutoCreateGaps(true);  
         layout.setAutoCreateContainerGaps(true); 
         layout.setHorizontalGroup(
         layout.createSequentialGroup()
-        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(label)
+        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(b).addComponent(label)
         .addComponent(day)
         .addComponent(time))
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(cb)
@@ -60,6 +58,7 @@ public class Select_Movie extends JApplet {
         
         layout.setVerticalGroup(
         layout.createSequentialGroup()
+        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(b))
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(label)
         .addComponent(cb))
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(day)
@@ -78,12 +77,47 @@ public class Select_Movie extends JApplet {
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(pay))*/
        ); 
         setLayout(layout); 
+         b.addActionListener((ActionListener) this);
+         d.addActionListener((ActionListener) this);
+        
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent arg0) {
+
+                System.exit(0);
+            }
+        });
+     }
+     public static void main(String args[]) { 
+        Select_Movie f =new Select_Movie();
+        f.setSize(500,300);
+        f.setVisible(true);
         
     }
 
-   
-        // TODO start asynchronous download of heavy resources
-    
 
-    // TODO overwrite start(), stop() and destroy() methods
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        try
+        {
+         if(ae.getSource() == b)
+         {
+          Search_Movie f = new Search_Movie();
+          f.setSize(500,300);
+          f.setVisible(true);
+          dispose();
+         } 
+         if(ae.getSource() == d)
+         {
+          seat_select f1 = new seat_select();
+          f1.setSize(500,300);
+          f1.setVisible(true);
+          dispose();
+         } 
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        } 
+    }
 }

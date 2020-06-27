@@ -11,37 +11,78 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JApplet;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  *
  * @author anjali
  */
-public class Customer_Interface extends JApplet implements ActionListener {
+public class Customer_Interface extends Frame implements ActionListener{
 
-    private final JButton login =new JButton("Login");//button for login
+    private final JButton login =new JButton(" Log in ");//button for login
     private final JButton signup =new JButton("Sign Up");//button sign up
-    @Override
-    public void init() {
+    private final JButton b =new JButton("<<");
+    public Customer_Interface() {
+        setTitle("CUSTOMER");
         GridBagLayout g1=new GridBagLayout();//gridLayout
 	setLayout(g1);
+      //  JPanel p = new JPanel(g1);
 	GridBagConstraints c= new GridBagConstraints();
-        c.weighty=0.0001;
+        g1.setConstraints(b, c);
+        add(b);
+        c.gridy=1;  
+        c.gridx=1;
+        c.weighty = 0.0001;
+        c.weightx = 0.0001;
         g1.setConstraints(login, c);
         add(login);
-        c.gridy=1;
+        c.gridy=2;
         g1.setConstraints(signup, c);
         add(signup);
         
+        b.addActionListener((ActionListener) this);
         login.addActionListener((ActionListener) this);
         signup.addActionListener((ActionListener) this); 
+        
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent arg0) {
+
+                System.exit(0);
+            }
+        });
     }
-
-    // TODO overwrite start(), stop() and destroy() methods
-
+    
+    public static void main(String args[]) { 
+        Customer_Interface fc = new Customer_Interface();
+        fc.setSize(500,300);
+        fc.setVisible(true);
+        
+        
+    }
+    
     @Override
     public void actionPerformed(ActionEvent ae) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        try
+        {
+         if(ae.getSource() == b)
+         {
+          GTA_Window f = new GTA_Window();
+          f.setSize(500,300);
+          f.setVisible(true);
+          dispose();
+         } 
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        } 
+       
     }
+   
 }
