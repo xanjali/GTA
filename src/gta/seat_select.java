@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 
 
 public class seat_select extends Frame implements ActionListener {
-    private final JButton b= new JButton("Back");
+    
     private final JButton s1= new JButton("s1 ");  
     private final JButton s2= new JButton("s2 ");
     private final JButton s3= new JButton("s3 ");
@@ -44,7 +44,14 @@ public class seat_select extends Frame implements ActionListener {
     private final JButton s25= new JButton("s25");
     
     private final JButton p= new JButton("Pay");
-     public seat_select(){
+    
+    protected int mid=1;
+    protected int cid=1;
+    protected int tid=2;
+     public seat_select(int idm,int idc,int idt){
+         mid=idm;
+         cid=idc;
+         tid=idt;
         setTitle("Select Seat");
         GroupLayout layout = new GroupLayout(this);  
         layout.setAutoCreateGaps(true);  
@@ -53,7 +60,6 @@ public class seat_select extends Frame implements ActionListener {
         layout.createSequentialGroup()
                 
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-        .addComponent(b)
         .addComponent(s1)
         .addComponent(s6)
         .addComponent(s11)
@@ -93,8 +99,6 @@ public class seat_select extends Frame implements ActionListener {
         layout.setVerticalGroup(
         layout.createSequentialGroup()
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-        .addComponent(b))
-        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
         .addComponent(s1)
         .addComponent(s2)
         .addComponent(s3)
@@ -133,8 +137,32 @@ public class seat_select extends Frame implements ActionListener {
         .addComponent(p))      
        ); 
         setLayout(layout); 
+        s1.addActionListener((ActionListener) this);
+        s2.addActionListener((ActionListener) this);
+        s3.addActionListener((ActionListener) this);
+        s4.addActionListener((ActionListener) this);
+        s5.addActionListener((ActionListener) this);
+        s6.addActionListener((ActionListener) this);
+        s7.addActionListener((ActionListener) this);
+        s8.addActionListener((ActionListener) this);
+        s9.addActionListener((ActionListener) this);
+        s10.addActionListener((ActionListener) this);
+        s11.addActionListener((ActionListener) this);
+        s12.addActionListener((ActionListener) this);
+        s13.addActionListener((ActionListener) this);
+        s14.addActionListener((ActionListener) this);
+        s15.addActionListener((ActionListener) this);
+        s16.addActionListener((ActionListener) this);
+        s17.addActionListener((ActionListener) this);
+        s18.addActionListener((ActionListener) this);
+        s19.addActionListener((ActionListener) this);
+        s20.addActionListener((ActionListener) this);
+        s21.addActionListener((ActionListener) this);
+        s22.addActionListener((ActionListener) this);
+        s23.addActionListener((ActionListener) this);
+        s24.addActionListener((ActionListener) this);
+        s25.addActionListener((ActionListener) this);
         
-        b.addActionListener((ActionListener) this);
         p.addActionListener((ActionListener) this);
         
         addWindowListener(new WindowAdapter() {
@@ -147,7 +175,7 @@ public class seat_select extends Frame implements ActionListener {
         
     }
      public static void main(String args[]) { 
-        seat_select f =new seat_select();
+        seat_select f =new seat_select(1,1,2);
         f.setSize(500,300);
         f.setVisible(true);
         
@@ -156,13 +184,13 @@ public class seat_select extends Frame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         
         try{
-         if(ae.getSource() == b)
-         {
-          Search_Movie f = new Search_Movie();
-          f.setSize(500,300);
-          f.setVisible(true);
-          dispose();
-         } 
+         
+            
+            
+            
+            
+            
+   
          if(ae.getSource() == p)
          {
           Payment_Details f1 =new Payment_Details();

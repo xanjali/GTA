@@ -16,20 +16,22 @@ import javax.swing.*;
  * @author anjali
  */
 public class Search_Movie extends Frame implements ActionListener {
-    private static final String url = "jdbc:mysql://localhost/dbname";
+    private static final String url = "jdbc:mysql://localhost/gta";
     private static final String user = "root";
     private static final String password = "root";
-
+    protected int cid=1;
     private final static JButton l = new JButton("Logout");
     private final static JTextField name =new JTextField  (20);//button-Search movie
     private final static JButton search = new JButton ("Search");//Button-Search
     private static final JLabel m = new JLabel("");
     private final static JButton n = new JButton ("Next >>");//next button
-    public Search_Movie() {
+    public Search_Movie(int idc) {
         setTitle("Search Movie/Select Movie");
+        cid=idc;
         GridBagLayout g1=new GridBagLayout();//gridLayout
 	setLayout(g1);
 	GridBagConstraints c= new GridBagConstraints();
+         //c.weightx=0.0001;
         c.gridx=0;
         c.gridy=2;
         g1.setConstraints(m, c);
@@ -68,13 +70,7 @@ public class Search_Movie extends Frame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         try
         {
-         if(ae.getSource() == n)
-         {
-           Select_Movie f = new Select_Movie();
-           f.setSize(500,300);
-           f.setVisible(true);
-           dispose();
-         } 
+         int mid = 0;
          if(ae.getSource() == l){
              Customer_Interface f1 = new Customer_Interface();
              f1.setSize(500,300);
@@ -82,28 +78,40 @@ public class Search_Movie extends Frame implements ActionListener {
              dispose();
          }
          else{
-         if(ae.getSource() == search)
-         {
           try {
-
             Connection con = DriverManager.getConnection(url, user, password);
             Statement s = con.createStatement();
             String a = name.getText();
-            System.out.println(a);
-            String q ="select * from abc where name = '"+a+"'";
+            if(ae.getSource() == search)
+            {
+            String q ="select mname,mabout from movie where mname = '"+a+"'";
             ResultSet r = s.executeQuery(q);
             while(r.next()){
-                m.setText(r.getInt(1)+"   "+r.getString(2));
+                m.setText(r.getString(1)+":   "+r.getString(2));
+            }
+            }
+            if(ae.getSource() == n)
+            {
+                String q1="select mid from movie where mname='"+a+"'";
+                ResultSet r1 = s.executeQuery(q1);
+                r1.next();
+                mid=r1.getInt(1);
+               // System.out.println(mid);
+                Select_Movie f = new Select_Movie(mid,cid);
+                f.setSize(500,300);
+                f.setVisible(true);
+                dispose();
+            } 
+            con.close();
           }
-        } catch (SQLException e) {
-        }
+        catch (SQLException e) {
         }
        } 
       }catch (Exception e){
       }
     }
     public static void main(String args[]) { 
-        Search_Movie f1 = new Search_Movie();
+        Search_Movie f1 = new Search_Movie(1);
         f1.setSize(500,300);
         f1.setVisible(true);
         
