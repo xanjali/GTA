@@ -102,19 +102,29 @@ public class moviedetails extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        // TODO add your handling code here:
+        aboutmovie t = new aboutmovie();
+        t.setVisible(true);
+        dispose();
+                // TODO add your handling code here:
     }//GEN-LAST:event_button1ActionPerformed
 
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
-        // TODO add your handling code here:
+        viewdetails t = new viewdetails();
+        t.setVisible(true);
+        dispose();
+// TODO add your handling code here:
     }//GEN-LAST:event_button3ActionPerformed
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
-        // TODO add your handling code here:
+        delmovie t = new delmovie();
+        t.setVisible(true);
+        dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_button2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+            selctFunction t = new selctFunction();
+            t.setVisible(true);
+            dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
