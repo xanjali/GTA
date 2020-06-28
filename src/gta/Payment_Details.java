@@ -5,6 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment.*;
@@ -13,27 +18,42 @@ import javax.swing.JButton;
 
 
 public class Payment_Details extends Frame implements ActionListener{
+    private final String url = "jdbc:mysql://localhost/gta";
+    private final String user = "root";
+    private final String password = "root";
+    
     private final JLabel details= new JLabel("  Details");
     private final JLabel name = new JLabel("Name          :                           ");
+    private final JLabel a1= new JLabel();
     private final JLabel movie = new JLabel("Movie          :");
+    private final JLabel a2= new JLabel();
     private final JLabel theatre = new JLabel("Theatre      :");
+    private final JLabel a3= new JLabel();
     private final JLabel date = new JLabel("Date            :");
+    private final JLabel a4= new JLabel();
     private final JLabel time = new JLabel("time            :");
+    private final JLabel a5= new JLabel();
     private final JLabel seat = new JLabel("Seat            :");
+    private final JLabel a6= new JLabel();
     private final JLabel amt = new JLabel("Amount       :");
+    private final JLabel a7= new JLabel();
     private final JButton pay = new JButton("Pay");
-    private final JButton b = new JButton("Back");
+   
     
-    public Payment_Details() {
+    protected int mid=1;
+    protected int cid=1;
+    protected int tid=2;
+    public Payment_Details(int idm,int idc,int idt) {
         setTitle("Payment Details");
+        mid=idm;
+        cid=idc;
+        tid=idt;
         GroupLayout layout = new GroupLayout(this);  
         layout.setAutoCreateGaps(true);  
         layout.setAutoCreateContainerGaps(true);  
-         
         layout.setHorizontalGroup(
         layout.createSequentialGroup()
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addComponent(b)
                 .addComponent(details,CENTER)
                 .addComponent(name)
                 .addComponent(movie)
@@ -43,25 +63,40 @@ public class Payment_Details extends Frame implements ActionListener{
                 .addComponent(seat)
                 .addComponent(amt))
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(a1)
+                .addComponent(a2)
+                .addComponent(a3)
+                .addComponent(a4)
+                .addComponent(a5)
+                .addComponent(a6)
+                .addComponent(a7)
                 .addComponent(pay,CENTER))
              
         ); 
         
         layout.setVerticalGroup(
         layout.createSequentialGroup()
-        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(b))
-        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(details))  
-        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(name))
-        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(movie))
-        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(theatre))
-        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(date))
-        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(time))
-        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(seat))
-        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(amt))
-        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(pay))
+        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+        .addComponent(details))  
+        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+        .addComponent(name) .addComponent(a1))
+        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+        .addComponent(movie) .addComponent(a2))
+        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+        .addComponent(theatre) .addComponent(a3))
+        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+        .addComponent(date) .addComponent(a4))
+        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+        .addComponent(time) .addComponent(a5))
+        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+        .addComponent(seat) .addComponent(a6))
+        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+        .addComponent(amt) .addComponent(a7))
+        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).
+        addComponent(pay))
         ); 
         setLayout(layout); 
-        b.addActionListener((ActionListener) this);
+        set_data();
         pay.addActionListener((ActionListener) this);
         
         addWindowListener(new WindowAdapter() {
@@ -74,26 +109,58 @@ public class Payment_Details extends Frame implements ActionListener{
         
     }
      public static void main(String args[]) { 
-        Payment_Details f =new Payment_Details();
+        Payment_Details f =new Payment_Details(1,1,2);
         f.setSize(500,300);
         f.setVisible(true);
         
     }
-
+     public final void set_data(){
+         try{
+          Connection con = DriverManager.getConnection(url, user, password);
+          Statement s = con.createStatement();
+          String q ="select cname from customer where cid='"+cid+"'";
+          ResultSet r = s.executeQuery(q);
+          r.next();
+          a1.setText(r.getString(1));
+          String q1 ="select mname from movie where mid='"+mid+"'";
+          r = s.executeQuery(q1);
+          r.next();
+          a2.setText(r.getString(1));
+          String q2 ="select tname from theatre where tid='"+tid+"'";
+          r = s.executeQuery(q2);
+          r.next();
+          a3.setText(r.getString(1));
+          String q3="select date,time from details where tid='"+tid
+                  +"' and mid='"+mid+"'";
+          r = s.executeQuery(q3);
+          r.next();
+          a4.setText(r.getString(1)); 
+          a5.setText(r.getString(2));
+          String str="";
+          String q4="select sid from seat where tid='"+tid
+                  +"' and mid='"+mid+"' and cid='"+cid+"'";
+          r = s.executeQuery(q4);
+          while(r.next()){
+          str=str+"s"+r.getString(1)+"  "; 
+          }
+          a6.setText(str);
+          String q5="select amt from booking where tid='"+tid
+                  +"' and mid='"+mid+"' and cid='"+cid+"'";
+          r = s.executeQuery(q5);
+          r.next();
+          a7.setText(r.getString(1)); 
+         }
+         catch(SQLException e){
+             
+         }
+     }
     
     @Override
     public void actionPerformed(ActionEvent ae) {
        try{
-         if(ae.getSource() == b)
-         {
-          seat_select f = new seat_select();
-          f.setSize(500,300);
-          f.setVisible(true);
-          dispose();
-         } 
          if(ae.getSource() == pay)
          {
-          Payment_Receipt f1 =new Payment_Receipt();
+          Payment_Receipt f1 =new Payment_Receipt(mid,cid,tid);
           f1.setSize(500,300);
           f1.setVisible(true);
           dispose();

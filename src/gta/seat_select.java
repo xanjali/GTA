@@ -4,6 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -12,6 +18,9 @@ import javax.swing.JFrame;
 
 
 public class seat_select extends Frame implements ActionListener {
+    private final String url = "jdbc:mysql://localhost/gta";
+    private final String user = "root";
+    private final String password = "root";
     
     private final JButton s1= new JButton("s1 ");  
     private final JButton s2= new JButton("s2 ");
@@ -19,32 +28,31 @@ public class seat_select extends Frame implements ActionListener {
     private final JButton s4= new JButton("s4 ");
     private final JButton s5= new JButton("s5 ");
     
-    private final JButton s6= new JButton("s6 ");
-    private final JButton s7= new JButton("s7 ");
-    private final JButton s8= new JButton("s8 ");
-    private final JButton s9= new JButton("s9 ");
-    private final JButton s10= new JButton("s10");
+    final JButton s6= new JButton("s6 ");
+    final JButton s7= new JButton("s7 ");
+    final JButton s8= new JButton("s8 ");
+    final JButton s9= new JButton("s9 ");
+    final JButton s10= new JButton("s10");
     
-    private final JButton s11= new JButton("s11");
-    private final JButton s12= new JButton("s12");
-    private final JButton s13= new JButton("s13");
-    private final JButton s14= new JButton("s14");
-    private final JButton s15= new JButton("s15");
+    final JButton s11= new JButton("s11");
+    final JButton s12= new JButton("s12");
+    final JButton s13= new JButton("s13");
+    final JButton s14= new JButton("s14");
+    final JButton s15= new JButton("s15");
     
-    private final JButton s16= new JButton("s16");
-    private final JButton s17= new JButton("s17");
-    private final JButton s18= new JButton("s18");
-    private final JButton s19= new JButton("s19");
-    private final JButton s20= new JButton("s20");
+    final JButton s16= new JButton("s16");
+    final JButton s17= new JButton("s17");
+    final JButton s18= new JButton("s18");
+    final JButton s19= new JButton("s19");
+    final JButton s20= new JButton("s20");
     
-    private final JButton s21= new JButton("s21");
-    private final JButton s22= new JButton("s22");
-    private final JButton s23= new JButton("s23");
-    private final JButton s24= new JButton("s24");
-    private final JButton s25= new JButton("s25");
+    final JButton s21= new JButton("s21");
+    final JButton s22= new JButton("s22");
+    final JButton s23= new JButton("s23");
+    final JButton s24= new JButton("s24");
+    final JButton s25= new JButton("s25");
     
-    private final JButton p= new JButton("Pay");
-    
+    final JButton p= new JButton("Pay");
     protected int mid=1;
     protected int cid=1;
     protected int tid=2;
@@ -136,7 +144,9 @@ public class seat_select extends Frame implements ActionListener {
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
         .addComponent(p))      
        ); 
-        setLayout(layout); 
+        setLayout(layout);
+        set_seat();
+        
         s1.addActionListener((ActionListener) this);
         s2.addActionListener((ActionListener) this);
         s3.addActionListener((ActionListener) this);
@@ -180,28 +190,309 @@ public class seat_select extends Frame implements ActionListener {
         f.setVisible(true);
         
     }
+     
+     public final void set_seat(){
+         try{
+         Connection con = DriverManager.getConnection(url, user, password);
+          Statement s = con.createStatement();
+          ResultSet r=s.executeQuery("select sid from seat where (mid='"+mid+
+                  "' and tid='"+tid+"' )");
+          while (r.next()) { 
+              int x=r.getInt(1);
+              System.out.println(x);
+              switch(x){
+                  case 1 :s1.setEnabled(false);break;
+                  case 2 :s2.setEnabled(false);break;
+                  case 3 :s3.setEnabled(false);break;
+                  case 4 :s4.setEnabled(false);break;
+                  case 5 :s5.setEnabled(false);break;
+                  case 6 :s6.setEnabled(false);break;
+                  case 7 :s7.setEnabled(false);break;
+                  case 8 :s8.setEnabled(false);break;
+                  case 9 :s9.setEnabled(false);break;
+                  case 10 :s10.setEnabled(false);break;
+                  case 11 :s11.setEnabled(false);break;
+                  case 12 :s12.setEnabled(false);break;
+                  case 13 :s13.setEnabled(false);break;
+                  case 14 :s14.setEnabled(false);break;
+                  case 15 :s15.setEnabled(false);break;
+                  case 16 :s16.setEnabled(false);break;
+                  case 17 :s17.setEnabled(false);break;
+                  case 18 :s18.setEnabled(false);break;
+                  case 19 :s19.setEnabled(false);break;
+                  case 20 :s20.setEnabled(false);break;
+                  case 21 :s21.setEnabled(false);break;
+                  case 22 :s22.setEnabled(false);break;
+                  case 23 :s23.setEnabled(false);break;
+                  case 24 :s24.setEnabled(false);break;
+                  case 25 :s25.setEnabled(false);break;
+              }
+          }
+         }
+         catch (SQLException e){
+         }
+     }
+     int i=0;
     @Override
     public void actionPerformed(ActionEvent ae) {
-        
-        try{
+        try{ 
          
-            
-            
-            
-            
-            
-   
+         Connection con1 = DriverManager.getConnection(url, user, password); 
+         String q= "insert into seat(tid,mid,cid,sid) "+"values(?,?,?,?)";
+         PreparedStatement p1 = con1.prepareStatement(q);
+         if(ae.getSource() == s1){
+             s1.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,1);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s2){
+             s2.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,2);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s3){
+             s3.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,3);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s4){
+             s4.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,4);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s5){
+             s5.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,5);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s6){
+             s6.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,mid);
+             p1.setInt(4,6);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s7){
+             s7.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,7);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s8){
+             s8.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,8);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s9){
+             s9.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,9);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s10){
+             s10.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,10);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s11){
+             s11.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,11);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s12){
+             s12.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,12);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s13){
+             s13.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,13);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s14){
+             s14.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,14);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s15){
+             s15.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,15);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s16){
+             s16.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,16);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s17){
+             s17.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,17);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s18){
+             s18.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,18);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s19){
+             s19.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,19);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s20){
+             s20.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,20);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s21){
+             s21.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,21);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s22){
+             s22.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,22);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s23){
+             s23.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,23);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s24){
+             s24.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,24);
+             p1.execute();
+             i++;
+         }
+         if(ae.getSource() == s25){
+             s25.setEnabled(false);
+             p1.setInt(1,tid);
+             p1.setInt(2,mid);
+             p1.setInt(3,cid);
+             p1.setInt(4,25);
+             p1.execute();
+             i++;
+         }
+         System.out.println(i);
+     
          if(ae.getSource() == p)
          {
-          Payment_Details f1 =new Payment_Details();
+          Statement ss2 = con1.createStatement();
+          ResultSet r2=ss2.executeQuery("select price from details where (tid='"+tid
+                  +"' and mid='"+mid+"')");
+          r2.next();
+          int x=r2.getInt(1);
+          System.out.println(x);
+          int i0=i;
+          int amt=x*i0;
+          System.out.println(amt);
+          String q2= "UPDATE booking SET amt = ? WHERE (tid='"+tid
+                  +"' and mid='"+mid+"'and cid='"+cid+"')";
+          PreparedStatement p2 = con1.prepareStatement(q2);
+          p2.setInt(1,amt);
+          p2.execute();
+          
+          Payment_Details f1 =new Payment_Details(mid,cid,tid);
           f1.setSize(500,300);
           f1.setVisible(true);
           dispose();
          } 
         }
-        catch (Exception ex)
+        catch (SQLException ex)
         {
-            ex.printStackTrace();
+            
         } 
     }
 }

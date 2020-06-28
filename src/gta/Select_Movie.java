@@ -88,7 +88,7 @@ public class Select_Movie extends Frame implements ActionListener,ItemListener {
      public final void add_cb_set(){
          //System.out.println(mid);
          try{
-         Connection con = DriverManager.getConnection(url, user, password);
+           Connection con = DriverManager.getConnection(url, user, password);
           Statement s = con.createStatement();
           Statement s1 = con.createStatement();
           ResultSet r0=s.executeQuery("select mname from movie where mid='"+mid+"'");
@@ -176,7 +176,6 @@ public class Select_Movie extends Frame implements ActionListener,ItemListener {
          {
           try{
           Connection con = DriverManager.getConnection(url, user, password);
-          Statement s = con.createStatement();
           String q= "insert into booking(cid,mid,tid)"+"values(?,?,?)";
            PreparedStatement p = con.prepareStatement(q);
            p.setInt(1, cid);
