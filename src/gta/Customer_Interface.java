@@ -87,6 +87,16 @@ public class Customer_Interface extends Frame implements ActionListener{
           f.setVisible(true);
           dispose();
          } 
+         else if(ae.getSource() == login){
+                 CustomerLogin f = new CustomerLogin();
+                 f.setVisible(true);
+                 dispose();
+             }
+             else if(ae.getSource() == signup){
+                 signUpUser f = new signUpUser();
+                 f.setVisible(true);
+                 dispose();
+             }
         }
         catch (Exception ex)
         {

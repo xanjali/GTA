@@ -83,6 +83,18 @@ public class owner_interface extends Frame implements ActionListener {
           f.setVisible(true);
           dispose();
          } 
+         else if(ae.getSource() == login)
+         {
+          OwnerLogin f = new OwnerLogin();
+          f.setVisible(true);
+          dispose();
+         }
+         else if(ae.getSource() == signup)
+         {
+          signUp f = new signUp();
+          f.setVisible(true);
+          dispose();
+         }
         }
         catch (Exception ex)
         {
