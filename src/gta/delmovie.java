@@ -31,6 +31,7 @@ public class delmovie extends javax.swing.JFrame {
     }
     public delmovie(int itd)
     {
+        initComponents();
         tid = itd;
         combobox();
     }

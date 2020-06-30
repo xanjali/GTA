@@ -29,6 +29,7 @@ public class viewdetails extends javax.swing.JFrame {
      */
     public viewdetails(int a)
     {
+            initComponents();
            tid=a;
            combobox();
            

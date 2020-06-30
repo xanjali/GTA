@@ -32,6 +32,7 @@ public class About_movie extends javax.swing.JFrame {
         initComponents();
     }
     public About_movie(int itd){
+        initComponents();
         tid = 1;
     }
     /**
