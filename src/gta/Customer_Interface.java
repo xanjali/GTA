@@ -14,7 +14,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -26,6 +28,11 @@ public class Customer_Interface extends Frame implements ActionListener{
     private final JButton login =new JButton(" Log in ");//button for login
     private final JButton signup =new JButton("Sign Up");//button sign up
     private final JButton b =new JButton("<<");
+    private final ImageIcon logo = new ImageIcon("/home/anjana/Desktop/c.png");
+    Image i=logo.getImage();
+    Image i1=i.getScaledInstance(150,125,java.awt.Image.SCALE_SMOOTH);
+    ImageIcon logo1 = new ImageIcon(i1);
+    private final JLabel img=new JLabel(logo1);
     public Customer_Interface() {
         setTitle("CUSTOMER");
         GridBagLayout g1=new GridBagLayout();//gridLayout
@@ -38,9 +45,12 @@ public class Customer_Interface extends Frame implements ActionListener{
         c.gridx=1;
         c.weighty = 0.0001;
         c.weightx = 0.0001;
+        g1.setConstraints(img, c);
+        add(img);
+        c.gridy=2;
         g1.setConstraints(login, c);
         add(login);
-        c.gridy=2;
+        c.gridy=3;
         g1.setConstraints(signup, c);
         add(signup);
         

@@ -111,7 +111,7 @@ public class Search_Movie extends Frame implements ActionListener {
       }
     }
     public static void main(String args[]) { 
-        Search_Movie f1 = new Search_Movie(2);
+        Search_Movie f1 = new Search_Movie(4);
         f1.setSize(500,300);
         f1.setVisible(true);
         

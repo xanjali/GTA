@@ -53,13 +53,12 @@ public class seat_select extends Frame implements ActionListener {
     final JButton s25= new JButton("s25");
     
     final JButton p= new JButton("Pay");
-    protected int mid=1;
-    protected int cid=1;
-    protected int tid=2;
-     public seat_select(int idm,int idc,int idt){
-         mid=idm;
-         cid=idc;
-         tid=idt;
+    
+    protected int bid=1;
+    protected int did=1;
+     public seat_select(int idd,int idb){
+         did=idd;
+         bid=idb;
         setTitle("Select Seat");
         GroupLayout layout = new GroupLayout(this);  
         layout.setAutoCreateGaps(true);  
@@ -185,7 +184,7 @@ public class seat_select extends Frame implements ActionListener {
         
     }
      public static void main(String args[]) { 
-        seat_select f =new seat_select(1,1,2);
+        seat_select f =new seat_select(1,1);
         f.setSize(500,300);
         f.setVisible(true);
         
@@ -195,8 +194,7 @@ public class seat_select extends Frame implements ActionListener {
          try{
          Connection con = DriverManager.getConnection(url, user, password);
           Statement s = con.createStatement();
-          ResultSet r=s.executeQuery("select sid from seat where (mid='"+mid+
-                  "' and tid='"+tid+"' )");
+          ResultSet r=s.executeQuery("select sid from seat where (did='"+did+"' )");
           while (r.next()) { 
               int x=r.getInt(1);
               System.out.println(x);
@@ -238,230 +236,205 @@ public class seat_select extends Frame implements ActionListener {
         try{ 
          
          Connection con1 = DriverManager.getConnection(url, user, password); 
-         String q= "insert into seat(tid,mid,cid,sid) "+"values(?,?,?,?)";
+         String q= "insert into seat(did,bid,sid) "+"values(?,?,?)";
          PreparedStatement p1 = con1.prepareStatement(q);
          if(ae.getSource() == s1){
              s1.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,1);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,1);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s2){
              s2.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,2);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,2);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s3){
              s3.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,3);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,3);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s4){
              s4.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,4);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,4);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s5){
              s5.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,5);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,5);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s6){
              s6.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,mid);
-             p1.setInt(4,6);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,6);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s7){
              s7.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,7);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,7);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s8){
              s8.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,8);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,8);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s9){
              s9.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,9);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,9);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s10){
              s10.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,10);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,10);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s11){
              s11.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,11);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,11);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s12){
              s12.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,12);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,12);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s13){
              s13.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,13);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,13);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s14){
              s14.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,14);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,14);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s15){
              s15.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,15);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,15);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s16){
              s16.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,16);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,16);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s17){
              s17.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,17);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,17);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s18){
              s18.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,18);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,18);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s19){
              s19.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,19);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,19);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s20){
              s20.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,20);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,20);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s21){
              s21.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,21);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,21);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s22){
              s22.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,22);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,22);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s23){
              s23.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,23);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,23);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s24){
              s24.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,24);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,24);
              p1.execute();
              i++;
          }
          if(ae.getSource() == s25){
              s25.setEnabled(false);
-             p1.setInt(1,tid);
-             p1.setInt(2,mid);
-             p1.setInt(3,cid);
-             p1.setInt(4,25);
+             p1.setInt(1,did);
+             p1.setInt(2,bid);
+             p1.setInt(3,25);
              p1.execute();
              i++;
          }
@@ -470,21 +443,18 @@ public class seat_select extends Frame implements ActionListener {
          if(ae.getSource() == p)
          {
           Statement ss2 = con1.createStatement();
-          ResultSet r2=ss2.executeQuery("select price from details where (tid='"+tid
-                  +"' and mid='"+mid+"')");
+          ResultSet r2=ss2.executeQuery("select price from details where did='"+did+"'");
           r2.next();
           int x=r2.getInt(1);
           System.out.println(x);
           int i0=i;
           int amt=x*i0;
           System.out.println(amt);
-          String q2= "UPDATE booking SET amt = ? WHERE (tid='"+tid
-                  +"' and mid='"+mid+"'and cid='"+cid+"')";
-          PreparedStatement p2 = con1.prepareStatement(q2);
-          p2.setInt(1,amt);
-          p2.execute();
+          String q2= "UPDATE booking set amt ="+amt+" WHERE bid="+bid;
+          System.out.println("********");
+          ss2.executeUpdate(q2);
           
-          Payment_Details f1 =new Payment_Details(mid,cid,tid);
+          Payment_Details f1 =new Payment_Details(did,bid);
           f1.setSize(500,300);
           f1.setVisible(true);
           dispose();

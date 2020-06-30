@@ -27,12 +27,13 @@ public class Select_Movie extends Frame implements ActionListener,ItemListener {
     protected int mid=1;
     protected int cid=1;
     protected int tid=0;
+    protected int did=0;
     private final JButton b = new JButton("Back");
     private final JLabel label = new JLabel("Theatre");           
     final JComboBox cb=new JComboBox();
     private final JLabel day = new JLabel("Date");
     final JComboBox cbd=new JComboBox();
-    private final JLabel time = new JLabel("Time");
+    private final JLabel t = new JLabel("Time");
     final JComboBox cbt=new JComboBox();
     private final JButton d = new JButton("Select Seat");
     public Select_Movie(int idm,int idc) {
@@ -47,7 +48,7 @@ public class Select_Movie extends Frame implements ActionListener,ItemListener {
         layout.createSequentialGroup()
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(b).addComponent(label)
         .addComponent(day)
-        .addComponent(time))
+        .addComponent(t))
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(cb)
         .addComponent(cbd).addComponent(cbt)
         .addComponent(d))
@@ -60,7 +61,7 @@ public class Select_Movie extends Frame implements ActionListener,ItemListener {
         .addComponent(cb))
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(day)
         .addComponent(cbd))
-        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(time)
+        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(t)
         .addComponent(cbt))
         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
         .addComponent(d))
@@ -70,7 +71,7 @@ public class Select_Movie extends Frame implements ActionListener,ItemListener {
          d.addActionListener((ActionListener) this);
          cb.addItemListener((ItemListener) this);
          cbd.addItemListener((ItemListener) this);
-        
+         cbt.addItemListener((ItemListener) this);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent arg0) {
@@ -117,7 +118,7 @@ public class Select_Movie extends Frame implements ActionListener,ItemListener {
             ResultSet r0=s.executeQuery("select tid from theatre where tname='"+c1+"'");
             r0.next();
             tid=r0.getInt(1);
-            System.out.println(tid+" "+mid);
+            System.out.println("*");
             cbd.addItem(" ");
             ResultSet r=s.executeQuery("select date from details where mid='"+mid+"' and tid='"+tid+"'");
             while (r.next()) { 
@@ -129,7 +130,7 @@ public class Select_Movie extends Frame implements ActionListener,ItemListener {
           catch(SQLException e){
          }
      }
-   
+     
      public final void add_cbt_set(String c2){
          System.out.println(c2);
          cbt.removeAllItems();
@@ -141,23 +142,32 @@ public class Select_Movie extends Frame implements ActionListener,ItemListener {
                     +"' and tid='"+tid+"' and date='"+c2+"')");
             while (r.next()) { 
                 String a2=r.getString(1);
-                System.out.println(a2);
+                //System.out.println(a2);
                 cbt.addItem(a2);
             }
          }
           catch(SQLException e){
          }
      }
-     
+     String date="";
+     String time="";
     @Override
      public void itemStateChanged(ItemEvent e) { 
         if(e.getSource() == cb){
         String c=(String) cb.getSelectedItem();
         add_cbd_set(c);
+        System.out.println(c);
         }
         if(e.getSource() == cbd){
             String c0=(String) cbd.getSelectedItem();
+            date=c0;
             add_cbt_set(c0);
+            System.out.println(date);
+        }
+        if(e.getSource() == cbt){
+            String c1=(String) cbt.getSelectedItem();
+            time=c1;
+            System.out.println(time);
         }
      }
 
@@ -174,19 +184,32 @@ public class Select_Movie extends Frame implements ActionListener,ItemListener {
          } 
          if(ae.getSource() == d)
          {
+             int bid=0;
           try{
-          Connection con = DriverManager.getConnection(url, user, password);
-          String q= "insert into booking(cid,mid,tid)"+"values(?,?,?)";
-           PreparedStatement p = con.prepareStatement(q);
-           p.setInt(1, cid);
-           p.setInt(2,mid);
-           p.setInt(3,tid);
+          Connection con1 = DriverManager.getConnection(url, user, password);
+          Statement s = con1.createStatement();
+          System.out.println(mid);
+          System.out.println(tid);
+          System.out.println(date);
+          System.out.println(time);
+          ResultSet r=s.executeQuery("select did from details where (mid='"+mid
+                    +"' and tid='"+tid+"' and date='"+date+"' and time='"+time+"')");
+          r.next();
+          did=r.getInt(1);
+          System.out.println(did);
+          String q= "insert into booking(cid,did)"+"values(?,?)";
+           PreparedStatement p = con1.prepareStatement(q);
+           p.setInt(1,cid);
+           p.setInt(2,did);
            p.execute();
-           con.close();
+          r=s.executeQuery("select bid from booking where cid="+cid+" and did="+did);
+          while(r.next()){
+          bid=r.getInt(1);
+          }
           }
           catch(SQLException e){
          }
-          seat_select f1 = new seat_select(mid,cid,tid);
+          seat_select f1 = new seat_select(did,bid);
           f1.setSize(500,300);
           f1.setVisible(true);
           dispose();

@@ -13,8 +13,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JApplet;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 /**
  *
@@ -22,9 +24,14 @@ import javax.swing.JButton;
  */
 public class owner_interface extends Frame implements ActionListener {
 
-    private final JButton login =new JButton("Login");//button for login
+    private final JButton login =new JButton("  Login  ");//button for login
     private final JButton signup =new JButton("Sign Up");//button sign up
     private final JButton b=new JButton("<<");
+    private final ImageIcon logo = new ImageIcon("/home/anjana/Desktop/c.png");
+    Image i=logo.getImage();
+    Image i1=i.getScaledInstance(150,125,java.awt.Image.SCALE_SMOOTH);
+    ImageIcon logo1 = new ImageIcon(i1);
+    private final JLabel img=new JLabel(logo1);
     public owner_interface() {
         setTitle("THEATRE OWNER");
         GridBagLayout g1=new GridBagLayout();//gridLayout
@@ -36,9 +43,12 @@ public class owner_interface extends Frame implements ActionListener {
         c.weightx=0.0001;
         c.gridx=1;
         c.gridy=1;
+        g1.setConstraints(img, c);
+        add(img);
+        c.gridy=2;
         g1.setConstraints(login, c);
         add(login);
-        c.gridy=2;
+        c.gridy=3;
         g1.setConstraints(signup, c);
         add(signup);
         b.addActionListener((ActionListener) this);

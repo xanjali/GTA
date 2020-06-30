@@ -39,15 +39,12 @@ public class Payment_Details extends Frame implements ActionListener{
     private final JLabel a7= new JLabel();
     private final JButton pay = new JButton("Pay");
    
-    
-    protected int mid=1;
-    protected int cid=1;
-    protected int tid=2;
-    public Payment_Details(int idm,int idc,int idt) {
+    protected int did=1;
+    protected int bid=1;
+    public Payment_Details(int idd,int idb) {
         setTitle("Payment Details");
-        mid=idm;
-        cid=idc;
-        tid=idt;
+        did=idd;
+        bid=idb;
         GroupLayout layout = new GroupLayout(this);  
         layout.setAutoCreateGaps(true);  
         layout.setAutoCreateContainerGaps(true);  
@@ -109,7 +106,7 @@ public class Payment_Details extends Frame implements ActionListener{
         
     }
      public static void main(String args[]) { 
-        Payment_Details f =new Payment_Details(1,1,2);
+        Payment_Details f =new Payment_Details(1,1);
         f.setSize(500,300);
         f.setVisible(true);
         
@@ -118,10 +115,19 @@ public class Payment_Details extends Frame implements ActionListener{
          try{
           Connection con = DriverManager.getConnection(url, user, password);
           Statement s = con.createStatement();
-          String q ="select cname from customer where cid='"+cid+"'";
+          String q ="select cid from booking where bid='"+bid+"'";
           ResultSet r = s.executeQuery(q);
           r.next();
+          int cid=r.getInt(1);
+          q ="select cname from customer where cid='"+cid+"'";
+          r = s.executeQuery(q);
+          r.next();
           a1.setText(r.getString(1));
+          String q0="select mid,tid from details where did="+did;
+          r = s.executeQuery(q0);
+          r.next();
+          int mid=r.getInt(1);
+          int tid=r.getInt(2);
           String q1 ="select mname from movie where mid='"+mid+"'";
           r = s.executeQuery(q1);
           r.next();
@@ -130,22 +136,19 @@ public class Payment_Details extends Frame implements ActionListener{
           r = s.executeQuery(q2);
           r.next();
           a3.setText(r.getString(1));
-          String q3="select date,time from details where tid='"+tid
-                  +"' and mid='"+mid+"'";
+          String q3="select date,time from details where did='"+did+"'";
           r = s.executeQuery(q3);
           r.next();
           a4.setText(r.getString(1)); 
           a5.setText(r.getString(2));
           String str="";
-          String q4="select sid from seat where tid='"+tid
-                  +"' and mid='"+mid+"' and cid='"+cid+"'";
+          String q4="select sid from seat where did='"+did+"' and bid='"+bid+"'";
           r = s.executeQuery(q4);
           while(r.next()){
           str=str+"s"+r.getString(1)+"  "; 
           }
           a6.setText(str);
-          String q5="select amt from booking where tid='"+tid
-                  +"' and mid='"+mid+"' and cid='"+cid+"'";
+          String q5="select amt from booking where bid='"+bid+"'";
           r = s.executeQuery(q5);
           r.next();
           a7.setText(r.getString(1)); 
@@ -160,7 +163,7 @@ public class Payment_Details extends Frame implements ActionListener{
        try{
          if(ae.getSource() == pay)
          {
-          Payment_Receipt f1 =new Payment_Receipt(mid,cid,tid);
+          Payment_Receipt f1 =new Payment_Receipt(did,bid);
           f1.setSize(500,300);
           f1.setVisible(true);
           dispose();
