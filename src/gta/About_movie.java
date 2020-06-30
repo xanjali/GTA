@@ -33,7 +33,7 @@ public class About_movie extends javax.swing.JFrame {
     }
     public About_movie(int itd){
         initComponents();
-        tid = 1;
+        tid = itd;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -238,7 +238,7 @@ public class About_movie extends javax.swing.JFrame {
              }
              String s2= jTextField3.getText();
              String s3 = jTextField4.getText();
-             s.execute("insert into details (tid,mid,date,time,price) values(1,'"+mid+"','"+s1+"','"+s2+"','"+s3+"');");
+             s.execute("insert into details (tid,mid,date,time,price) values('"+tid+"','"+mid+"','"+s1+"','"+s2+"','"+s3+"');");
              moviedetails t = new moviedetails();
             t.setVisible(true);
             dispose();
@@ -281,14 +281,14 @@ public class About_movie extends javax.swing.JFrame {
              r.next();
              String s1=r.getString(1);
              jTextField6.setText(s1);
-             q= "insert into movie (tid,mname,mabout) values(1,'"+str+"','"+s2+"');";
+             q= "insert into movie (mname,mabout) values('"+str+"','"+s2+"');";
                s.executeUpdate(q);
             }
             else
              {
              
              System.out.println(s2);
-              q= "insert into movie (tid,mname,mabout) values(1,'"+str+"','"+s2+"');";
+              q= "insert into movie (tid,mname,mabout) values('"+tid+"','"+str+"','"+s2+"');";
               s.executeUpdate(q);
              }
             

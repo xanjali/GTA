@@ -21,7 +21,7 @@ public class viewdetails extends javax.swing.JFrame {
     
      private static final String url = "jdbc:mysql://localhost:3306/gta";
         private static final String user = "root";
-        private static final String password = "Karthik@1234";
+        private static final String password = "imerck@24aug2000";
     protected int tid;
     
     /**

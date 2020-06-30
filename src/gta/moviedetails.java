@@ -25,6 +25,7 @@ public class moviedetails extends javax.swing.JFrame implements ActionListener  
      * Creates new form moviedetails
      */
     public moviedetails(int idt) {
+        initComponents();
         tid = idt;
         
     }

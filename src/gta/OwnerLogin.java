@@ -18,7 +18,7 @@ public class OwnerLogin extends javax.swing.JFrame {
     
     private static final String url = "jdbc:mysql://localhost:3306/gta?autoReconnect=true&useSSL=false";
     private static final String user = "root";
-    private static final String password = "Karthik@1234";
+    private static final String password = "imerck@24aug2000";
     /**
      * Creates new form OwnerLogin
      */
@@ -168,20 +168,28 @@ public class OwnerLogin extends javax.swing.JFrame {
             Connection connection = DriverManager.getConnection(url, user, password);
             Statement stmt = connection.createStatement();
             String query = new String("select * from theatre where temail='"+Oemail+"' and tpassword ='"+OPassword+"'");
+            
             ResultSet RS = stmt.executeQuery(query);
+            RS.next();
  
         
-        if( RS.first() ){
+        //if( RS.first() ){
             //Display "Valid Credentials" and make cemail unique
             Status.setText("Valid Credentials");
-            selctFunction MD = new selctFunction();
+            String q=("select tid from theatre where temail='"+Oemail+"';");
+           
+            RS =stmt.executeQuery(q);
+             RS.next();
+            int p =RS.getInt(1);
+            
+            selctFunction MD = new selctFunction(p);
             MD.setVisible(true);
             dispose();
-        }
-        else{
+        //}
+        //else{
             //Display "Invalid Credentials"
-            Status.setText("Invalid Credentials");
-        }
+          //  Status.setText("Invalid Credentials");
+        //}
         }
         catch(SQLException e){
         e.printStackTrace();

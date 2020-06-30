@@ -10,11 +10,16 @@ package gta;
  * @author user
  */
 public class selctFunction extends javax.swing.JFrame {
-
+    protected int tid;
     /**
      * Creates new form selctFunction
      */
     public selctFunction() {
+        initComponents();
+    }
+    public selctFunction(int p)
+    {
+        tid=p;
         initComponents();
     }
 
@@ -146,7 +151,7 @@ public class selctFunction extends javax.swing.JFrame {
 
     private void ManageMDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageMDActionPerformed
         // TODO add your handling code here:
-        moviedetails MD = new moviedetails();
+        moviedetails MD = new moviedetails(tid);
         MD.setVisible(true);
         dispose();
     }//GEN-LAST:event_ManageMDActionPerformed
