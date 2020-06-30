@@ -22,11 +22,7 @@ class SimpleTableModel extends AbstractTableModel {
   protected static int soldA;
   protected static int soldB;
 
-  public void print(){
-      Loader L1 = new Loader();
-       soldA = L1.solda;
-       soldB = L1.soldb;
-  }
+  
   
   int gross1 = soldA*50;
   int gross2 = soldB*50;
@@ -106,6 +102,7 @@ class JTableUtilities{
 }
 
 public class Dcr extends JFrame {
+
   public Dcr() {
     this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
