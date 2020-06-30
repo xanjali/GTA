@@ -1,5 +1,3 @@
-package gta.Dcr;
-
 import java.awt.BorderLayout;
 import java.awt.Container;
 import javax.swing.JFrame;
@@ -121,7 +119,7 @@ public class Dcr extends JFrame {
   }
 
   public static void main(String[] args) {
-    Main bf = new Main();
+    Dcr bf = new Dcr();
     bf.pack();
     bf.setVisible(true);
   }
