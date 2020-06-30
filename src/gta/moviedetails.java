@@ -115,21 +115,21 @@ public class moviedetails extends javax.swing.JFrame implements ActionListener  
     }// </editor-fold>//GEN-END:initComponents
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        aboutmovie t = new aboutmovie(tid);
+        About_movie t = new About_movie(tid);
         t.setVisible(true);
         dispose();
                 // TODO add your handling code here:
     }//GEN-LAST:event_button1ActionPerformed
 
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
-        viewdetails t = new viewdetails();
+        viewdetails t = new viewdetails(tid);
         t.setVisible(true);
         dispose();
 // TODO add your handling code here:
     }//GEN-LAST:event_button3ActionPerformed
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
-        delmovie t = new delmovie();
+        delmovie t = new delmovie(tid);
         t.setVisible(true);
         dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_button2ActionPerformed

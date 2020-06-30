@@ -21,8 +21,8 @@ import java.util.logging.Logger;
 public class About_movie extends javax.swing.JFrame {
      private static final String url = "jdbc:mysql://localhost/gta";
         private static final String user = "root";
-        private static final String password = "root";
-    protected int a;
+        private static final String password = "imerck@24aug2000";
+    protected int tid;
     Integer mid=0;
     protected String str;
     /**
@@ -32,7 +32,7 @@ public class About_movie extends javax.swing.JFrame {
         initComponents();
     }
     public About_movie(int itd){
-        a = 1;
+        tid = 1;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -229,7 +229,7 @@ public class About_movie extends javax.swing.JFrame {
              Statement s = con.createStatement();
              String s1 = jTextField2.getText();
              if(x==false){
-             String  q = "select mid from movie where mname='"+str+"'and tid =1;";
+             String  q = "select mid from movie where mname='"+str+"'and tid ='"+tid+"';";
              ResultSet r=s.executeQuery(q);
              while(r.next()){
              mid = r.getInt(1);
@@ -270,12 +270,12 @@ public class About_movie extends javax.swing.JFrame {
              String s2 = jTextField6.getText();
              Connection con = DriverManager.getConnection(url, user, password);
              Statement s = con.createStatement();
-             String  q = "select mid from movie where mname='"+str+"'and tid =1;";
+             String  q = "select mid from movie where mname='"+str+"'and tid ='"+tid+"';";
              ResultSet r= s.executeQuery(q);
              x=r.next();
              if(x==true){
              mid=r.getInt(1);
-             q="select mabout from movie where mid= '"+mid+"' and tid =1;";
+             q="select mabout from movie where mid= '"+mid+"' and tid ='"+tid+"';";
              r=s.executeQuery(q);
              r.next();
              String s1=r.getString(1);

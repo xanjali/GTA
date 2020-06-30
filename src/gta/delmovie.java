@@ -5,19 +5,35 @@
  */
 package gta;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author harig
  */
 public class delmovie extends javax.swing.JFrame {
-
+     private static final String url = "jdbc:mysql://localhost/gta";
+        private static final String user = "root";
+        private static final String password = "imerck@24aug2000";
+    protected int tid;
     /**
      * Creates new form delmovie
      */
     public delmovie() {
         initComponents();
+        combobox();
     }
-
+    public delmovie(int itd)
+    {
+        tid = itd;
+        combobox();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,6 +56,11 @@ public class delmovie extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jButton1.setText("REMOVE");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jButton2.setText("BACK");
@@ -49,7 +70,11 @@ public class delmovie extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,6 +119,43 @@ public class delmovie extends javax.swing.JFrame {
         t.setVisible(true);
         dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+    private void combobox()
+    {
+         try {
+             String q= "select * from movie where tid='"+tid+"';";
+             Connection con = DriverManager.getConnection(url, user, password);
+             Statement s = con.createStatement();
+             ResultSet r= s.executeQuery(q);
+             while(r.next()){
+                   jComboBox1.addItem(r.getString("mname"));
+             }
+         } catch (SQLException ex) {
+             Logger.getLogger(delmovie.class.getName()).log(Level.SEVERE, null, ex);
+         }
+             
+    }
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         try {
+             String val = (String)jComboBox1.getSelectedItem();
+             Connection con = DriverManager.getConnection(url, user, password);
+             Statement s = con.createStatement();
+             String q = "select mid from movie where mname='"+val+"' and tid='"+tid+"';";
+             ResultSet r =s.executeQuery(q);
+             r.next();
+             int p=0;
+             p=r.getInt(1);
+             s.execute("delete from details where mid='"+p+"';");
+             s.execute("delete from movie where mid='"+p+"';");
+             
+// TODO add your handling code here:
+         } catch (SQLException ex) {
+             Logger.getLogger(delmovie.class.getName()).log(Level.SEVERE, null, ex);
+         }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
