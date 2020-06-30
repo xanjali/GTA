@@ -4,20 +4,33 @@
  * and open the template in the editor.
  */
 package gta;
-
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.*;
 /**
  *
  * @author harig
+ *//**
+ *
+ * @author harig
  */
-public class moviedetails extends javax.swing.JFrame {
-
-    /**
+public class moviedetails extends javax.swing.JFrame implements ActionListener  {
+        private static final String url = "jdbc:mysql://localhost/gta";
+        private static final String user = "root";
+        private static final String password = "imerck@24aug2000";
+        protected int tid;
+        
+        /** 
      * Creates new form moviedetails
      */
-    public moviedetails() {
+    public moviedetails(int idt) {
+        tid = idt;
+        
+    }
+    public moviedetails(){
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -102,7 +115,7 @@ public class moviedetails extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        aboutmovie t = new aboutmovie();
+        aboutmovie t = new aboutmovie(tid);
         t.setVisible(true);
         dispose();
                 // TODO add your handling code here:
@@ -168,4 +181,9 @@ public class moviedetails extends javax.swing.JFrame {
     private java.awt.Button button3;
     private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
