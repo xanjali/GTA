@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author harig
  */
-public class aboutmovie extends javax.swing.JFrame {
+public class About_movie extends javax.swing.JFrame {
      private static final String url = "jdbc:mysql://localhost/gta";
         private static final String user = "root";
         private static final String password = "root";
@@ -28,10 +28,10 @@ public class aboutmovie extends javax.swing.JFrame {
     /**
      * Creates new form aboutmovie
      */
-    public aboutmovie() {
+    public About_movie() {
         initComponents();
     }
-    public aboutmovie(int itd){
+    public About_movie(int itd){
         a = 1;
     }
     /**
@@ -242,7 +242,7 @@ public class aboutmovie extends javax.swing.JFrame {
             t.setVisible(true);
             dispose();
          } catch (SQLException ex) {
-             Logger.getLogger(aboutmovie.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(About_movie.class.getName()).log(Level.SEVERE, null, ex);
          }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -293,7 +293,7 @@ public class aboutmovie extends javax.swing.JFrame {
             
 
          } catch (SQLException ex) {    
-             Logger.getLogger(aboutmovie.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(About_movie.class.getName()).log(Level.SEVERE, null, ex);
          }
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -319,20 +319,20 @@ public class aboutmovie extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(aboutmovie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(About_movie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(aboutmovie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(About_movie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(aboutmovie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(About_movie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(aboutmovie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(About_movie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new aboutmovie().setVisible(true);
+                new About_movie().setVisible(true);
             }
         });
     }
