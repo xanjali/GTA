@@ -21,8 +21,9 @@ import java.util.logging.Logger;
 public class aboutmovie extends javax.swing.JFrame {
      private static final String url = "jdbc:mysql://localhost/gta";
         private static final String user = "root";
-        private static final String password = "imerck@24aug2000";
+        private static final String password = "root";
     protected int a;
+    Integer mid=0;
     protected String str;
     /**
      * Creates new form aboutmovie
@@ -54,7 +55,8 @@ public class aboutmovie extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+        jTextField6 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,6 +118,20 @@ public class aboutmovie extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Check");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jTextField6.setText(" ");
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -150,9 +166,11 @@ public class aboutmovie extends javax.swing.JFrame {
                                         .addGap(103, 103, 103)
                                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(127, 127, 127)
-                                        .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)))))))
-                .addContainerGap(89, Short.MAX_VALUE))
+                                        .addGap(114, 114, 114)
+                                        .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3)))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,14 +184,15 @@ public class aboutmovie extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGap(0, 96, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jButton3)
+                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(135, 135, 135)))
-                        .addGap(92, 92, 92))
+                        .addGap(63, 63, 63))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -197,35 +216,7 @@ public class aboutmovie extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-         try {
-             str = jTextField1.getText();
-             Connection con = DriverManager.getConnection(url, user, password);
-             Statement s = con.createStatement();
-             
-             String  q = "select mid from movie where mname='"+str+"'and tid =1;";
-             ResultSet r= s.executeQuery(q);
-             r.next();
-             int p;
-             p=r.getInt(1);
-             q="select mabout from movie where mid= '"+p+"' and tid =1;";
-             r=s.executeQuery(q);
-             String s1="";
-             r.next();
-             s1=r.getString(1);
-             if(s1.equals("")){
-                 String s2 = jTextField5.getText();
-                 s.execute("insert into movie(mabout,tid) values ('"+s2+"',1);");
-            }
-            else
-             {
-                jTextField5.setText(s1);
-             }
-            
-
-         } catch (SQLException ex) {    
-             Logger.getLogger(aboutmovie.class.getName()).log(Level.SEVERE, null, ex);
-         }
-
+         
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
     
@@ -236,16 +227,20 @@ public class aboutmovie extends javax.swing.JFrame {
         try {
              Connection con = DriverManager.getConnection(url, user, password);
              Statement s = con.createStatement();
-             
-             s.execute("insert into movie(mname,tid) values('"+str+"',1);");
              String s1 = jTextField2.getText();
+             if(x==false){
              String  q = "select mid from movie where mname='"+str+"'and tid =1;";
              ResultSet r=s.executeQuery(q);
-             r.next();
-             int mid = r.getInt(1);
+             while(r.next()){
+             mid = r.getInt(1);
+             }
+             }
              String s2= jTextField3.getText();
              String s3 = jTextField4.getText();
              s.execute("insert into details (tid,mid,date,time,price) values(1,'"+mid+"','"+s1+"','"+s2+"','"+s3+"');");
+             moviedetails t = new moviedetails();
+            t.setVisible(true);
+            dispose();
          } catch (SQLException ex) {
              Logger.getLogger(aboutmovie.class.getName()).log(Level.SEVERE, null, ex);
          }        // TODO add your handling code here:
@@ -268,6 +263,44 @@ public class aboutmovie extends javax.swing.JFrame {
             t.setVisible(true);
             dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+                boolean x;
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+             str = jTextField1.getText();
+             String s2 = jTextField6.getText();
+             Connection con = DriverManager.getConnection(url, user, password);
+             Statement s = con.createStatement();
+             String  q = "select mid from movie where mname='"+str+"'and tid =1;";
+             ResultSet r= s.executeQuery(q);
+             x=r.next();
+             if(x==true){
+             mid=r.getInt(1);
+             q="select mabout from movie where mid= '"+mid+"' and tid =1;";
+             r=s.executeQuery(q);
+             r.next();
+             String s1=r.getString(1);
+             jTextField6.setText(s1);
+             q= "insert into movie (tid,mname,mabout) values(1,'"+str+"','"+s2+"');";
+               s.executeUpdate(q);
+            }
+            else
+             {
+             
+             System.out.println(s2);
+              q= "insert into movie (tid,mname,mabout) values(1,'"+str+"','"+s2+"');";
+              s.executeUpdate(q);
+             }
+            
+
+         } catch (SQLException ex) {    
+             Logger.getLogger(aboutmovie.class.getName()).log(Level.SEVERE, null, ex);
+         }
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -307,6 +340,7 @@ public class aboutmovie extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -317,6 +351,6 @@ public class aboutmovie extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }
