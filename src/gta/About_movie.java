@@ -229,15 +229,22 @@ boolean x;
              Connection con = DriverManager.getConnection(url, user, password);
              Statement s = con.createStatement();
              String s1 = jTextField2.getText();
-            
+             String s2= jTextField3.getText();
+             String s3 = jTextField4.getText();
+             if(x==false)
+             {     
              String  q = "select mid from movie where mname='"+str+"'and tid ='"+tid+"';";
              ResultSet r=s.executeQuery(q);
              r.next();
              mid = r.getInt(1);
-             String s2= jTextField3.getText();
-             String s3 = jTextField4.getText();
+            
              s.execute("insert into details (tid,mid,date,time,price) values('"+tid+"','"+mid+"','"+s1+"','"+s2+"','"+s3+"');");
-             moviedetails t = new moviedetails(tid);
+             }
+             else
+             {
+            
+             s.execute("update details set date='"+s1+"',time='"+s2+"',price='"+s3+"' where tid='"+tid+"' and mid='"+mid+"';");
+             }moviedetails t = new moviedetails(tid);
             t.setVisible(true);
             dispose();
          } catch (SQLException ex) {
