@@ -32,8 +32,8 @@ public class About_movie extends javax.swing.JFrame {
         initComponents();
     }
     public About_movie(int itd){
-        initComponents();
         tid = itd;
+        initComponents();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -215,7 +215,7 @@ public class About_movie extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+boolean x;
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
          
         // TODO add your handling code here:
@@ -229,17 +229,15 @@ public class About_movie extends javax.swing.JFrame {
              Connection con = DriverManager.getConnection(url, user, password);
              Statement s = con.createStatement();
              String s1 = jTextField2.getText();
-             if(x==false){
+            
              String  q = "select mid from movie where mname='"+str+"'and tid ='"+tid+"';";
              ResultSet r=s.executeQuery(q);
-             while(r.next()){
+             r.next();
              mid = r.getInt(1);
-             }
-             }
              String s2= jTextField3.getText();
              String s3 = jTextField4.getText();
              s.execute("insert into details (tid,mid,date,time,price) values('"+tid+"','"+mid+"','"+s1+"','"+s2+"','"+s3+"');");
-             moviedetails t = new moviedetails();
+             moviedetails t = new moviedetails(tid);
             t.setVisible(true);
             dispose();
          } catch (SQLException ex) {
@@ -260,11 +258,11 @@ public class About_movie extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-            moviedetails t = new moviedetails();
+            moviedetails t = new moviedetails(tid);
             t.setVisible(true);
             dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
-                boolean x;
+                
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
              str = jTextField1.getText();
@@ -274,6 +272,7 @@ public class About_movie extends javax.swing.JFrame {
              String  q = "select mid from movie where mname='"+str+"'and tid ='"+tid+"';";
              ResultSet r= s.executeQuery(q);
              x=r.next();
+            
              if(x==true){
              mid=r.getInt(1);
              q="select mabout from movie where mid= '"+mid+"' and tid ='"+tid+"';";
@@ -281,15 +280,11 @@ public class About_movie extends javax.swing.JFrame {
              r.next();
              String s1=r.getString(1);
              jTextField6.setText(s1);
-             q= "insert into movie (mname,mabout) values('"+str+"','"+s2+"');";
-               s.executeUpdate(q);
             }
             else
              {
              
-             System.out.println(s2);
-              q= "insert into movie (tid,mname,mabout) values('"+tid+"','"+str+"','"+s2+"');";
-              s.executeUpdate(q);
+                s.execute("insert into movie (tid,mname,mabout) values('"+tid+"','"+str+"','"+s2+"');");
              }
             
 

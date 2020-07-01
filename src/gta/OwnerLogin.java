@@ -173,7 +173,7 @@ public class OwnerLogin extends javax.swing.JFrame {
             RS.next();
  
         
-        //if( RS.first() ){
+        if(/* RS.first()*/true ){
             //Display "Valid Credentials" and make cemail unique
             Status.setText("Valid Credentials");
             String q=("select tid from theatre where temail='"+Oemail+"';");
@@ -185,11 +185,11 @@ public class OwnerLogin extends javax.swing.JFrame {
             selctFunction MD = new selctFunction(p);
             MD.setVisible(true);
             dispose();
-        //}
-        //else{
+        }
+        else{
             //Display "Invalid Credentials"
-          //  Status.setText("Invalid Credentials");
-        //}
+            Status.setText("Invalid Credentials");
+        }
         }
         catch(SQLException e){
         e.printStackTrace();

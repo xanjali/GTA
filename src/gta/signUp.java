@@ -16,7 +16,7 @@ public class signUp extends javax.swing.JFrame {
     
     private static final String url = "jdbc:mysql://localhost:3306/gta?autoReconnect=true&useSSL=false";
     private static final String user = "root";
-    private static final String password = "Karthik@1234";
+    private static final String password = "imerck@24aug2000";
     int OwnerID;
     /**
      * Creates new form signUp
@@ -247,7 +247,8 @@ public class signUp extends javax.swing.JFrame {
                 
             }
             catch(SQLException e){
-                e.printStackTrace();
+              // Status.setText("<message>");
+               e.printStackTrace();
             }
             }
     }//GEN-LAST:event_SubmitActionPerformed

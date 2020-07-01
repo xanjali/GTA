@@ -116,7 +116,7 @@ public class delmovie extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        moviedetails t = new moviedetails();
+        moviedetails t = new moviedetails(tid);
         t.setVisible(true);
         dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -149,8 +149,8 @@ public class delmovie extends javax.swing.JFrame {
              r.next();
              int p=0;
              p=r.getInt(1);
-             s.execute("delete from details where mid='"+p+"';");
-             s.execute("delete from movie where mid='"+p+"';");
+             s.execute("delete from details where mid='"+p+"'and tid='"+tid+"';");
+             s.execute("delete from movie where mid='"+p+"'and tid='"+tid+"';");
              
 // TODO add your handling code here:
          } catch (SQLException ex) {
