@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class delmovie extends javax.swing.JFrame {
      private static final String url = "jdbc:mysql://localhost/gta";
         private static final String user = "root";
-        private static final String password = "imerck@24aug2000";
+        private static final String password = "root";
     protected int tid;
     /**
      * Creates new form delmovie

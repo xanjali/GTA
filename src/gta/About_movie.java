@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class About_movie extends javax.swing.JFrame {
      private static final String url = "jdbc:mysql://localhost/gta";
         private static final String user = "root";
-        private static final String password = "imerck@24aug2000";
+        private static final String password = "root";
     protected int tid;
     Integer mid=0;
     protected String str;

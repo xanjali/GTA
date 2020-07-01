@@ -18,7 +18,7 @@ import java.sql.*;
 public class moviedetails extends javax.swing.JFrame implements ActionListener  {
         private static final String url = "jdbc:mysql://localhost/gta";
         private static final String user = "root";
-        private static final String password = "imerck@24aug2000";
+        private static final String password = "root";
         protected int tid;
         
         /** 

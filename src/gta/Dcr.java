@@ -1,3 +1,7 @@
+package gta;
+
+import java.sql.*;
+import java.lang.Math;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import javax.swing.JFrame;
@@ -14,30 +18,23 @@ class SimpleTableModel extends AbstractTableModel {
   String s1 = "300";
   String s2 = "646";
 
+  protected static int soldA = 20;
+
   int frm1 = 0;
-  int frm2 = 0;
-  int to1 = 0;
-  int to2 = 0;
+  int to1 = soldA;
 
-  protected static int soldA;
-  protected static int soldB;
-
-  
-  
   int gross1 = soldA*50;
-  int gross2 = soldB*50;
+  
   int cess1 = soldA*3;
-  int cess2 = soldB*3;
+  
   double cgst1  = soldA*50*0.09;
   double sgst1  = soldA*50*0.09;
-  double cgst2  = soldB*50*0.09;
-  double sgst2  = soldB*50*0.09;
+
   int sc1 = soldA*2;
-  int sc2 = soldA*2;
-  double et1 = soldA*3.13;
-  double et2 = soldB*2.71;
-  double fc1 = soldA*0.68;
-  double fc2 = soldB*0.59;
+
+  double et1 = Math.floor((soldA*3.13)*100)/100;
+
+  double fc1 = Math.floor((soldA*0.68)*100)/100;
 
   private Object[][] data = {};
   private String[] columnNames = {"Seats","Class","Rate","","Ticket","","Sold","Gross","Cess","SC","ET","FC","","GST",""};
@@ -45,8 +42,7 @@ class SimpleTableModel extends AbstractTableModel {
   private Object[][] rowData = new Object[][] {
       {"","","","From","","To","","","","","","","CGST","","SGST"},
       {s1,"R","75",frm1,"",to1,soldA,gross1,cess1,sc1,et1,fc1,cgst1,"",sgst1},
-      {"","","","","","","","","","","","","","","",},
-      {s2,"I","65",frm2,"",to2,soldB,gross2,cess2,sc2,et2,fc2,cgst2,"",sgst2} };
+       };
 
   public SimpleTableModel() {
   }
@@ -113,11 +109,12 @@ public class Dcr extends JFrame {
     Container contentPane = this.getContentPane();
     contentPane.add(new JScrollPane(table), BorderLayout.CENTER);
 
+    pack();
+    setVisible(true);
+
   }
 
   public static void main(String[] args) {
-    Dcr bf = new Dcr();
-    bf.pack();
-    bf.setVisible(true);
+
   }
 }

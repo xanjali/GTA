@@ -158,6 +158,11 @@ public class selctFunction extends javax.swing.JFrame {
 
     private void DCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DCRActionPerformed
         // TODO add your handling code here:
+
+        Dcr d1 = new Dcr();
+
+
+
     }//GEN-LAST:event_DCRActionPerformed
 
     private void SpotIssueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SpotIssueActionPerformed

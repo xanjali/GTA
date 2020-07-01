@@ -18,7 +18,7 @@ public class OwnerLogin extends javax.swing.JFrame {
     
     private static final String url = "jdbc:mysql://localhost:3306/gta?autoReconnect=true&useSSL=false";
     private static final String user = "root";
-    private static final String password = "imerck@24aug2000";
+    private static final String password = "root";
     /**
      * Creates new form OwnerLogin
      */

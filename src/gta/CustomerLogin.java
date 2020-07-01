@@ -22,7 +22,7 @@ public class CustomerLogin extends javax.swing.JFrame {
      */
     private static final String url = "jdbc:mysql://localhost:3306/gta?autoReconnect=true&useSSL=false";
     private static final String user = "root";
-    private static final String password = "Karthik@1234";
+    private static final String password = "root";
     private int Cid;
     
     public CustomerLogin() {

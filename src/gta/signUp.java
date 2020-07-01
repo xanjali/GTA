@@ -14,9 +14,9 @@ import java.sql.DriverManager;
 public class signUp extends javax.swing.JFrame {
 
     
-    private static final String url = "jdbc:mysql://localhost:3306/gta?autoReconnect=true&useSSL=false";
+    private static final String url = "jdbc:mysql://localhost:3306/gta";
     private static final String user = "root";
-    private static final String password = "imerck@24aug2000";
+    private static final String password = "root";
     int OwnerID;
     /**
      * Creates new form signUp
@@ -227,7 +227,8 @@ public class signUp extends javax.swing.JFrame {
                 
                 //The email id must be unique
                 ResultSet RS = stmt.executeQuery("select * from theatre where temail ='"+Temail+"'");
-                if(!RS.first()){
+                if(!RS.next()){
+                    System.out.println("It Works !!");
                     // email is unique .. insert values
                     RS= stmt.executeQuery("select * from theatre ");
                     while(RS.next())
